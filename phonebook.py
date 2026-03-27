@@ -4,7 +4,7 @@ import csv
 conn = get_connection()
 cur = conn.cursor()
 
-# 🔥 создаём таблицу
+
 cur.execute("""
 CREATE TABLE IF NOT EXISTS phonebook (
     id SERIAL PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS phonebook (
 conn.commit()
 
 
-# ➕ INSERT через консоль
+
 def insert_from_console():
     name = input("Name: ")
     phone = input("Phone: ")
@@ -28,7 +28,7 @@ def insert_from_console():
     print("Added.")
 
 
-# 📂 INSERT из CSV
+
 def insert_from_csv():
     with open("contacts.csv", newline='', encoding='utf-8') as f:
         reader = csv.reader(f)
@@ -44,7 +44,7 @@ def insert_from_csv():
     print("CSV imported.")
 
 
-# 🔍 SELECT
+
 def search():
     name = input("Search: ")
 
@@ -62,7 +62,7 @@ def search():
             print(row)
 
 
-# ✏️ UPDATE
+
 def update():
     name = input("Name to update: ")
     new_phone = input("New phone: ")
@@ -75,7 +75,7 @@ def update():
     print("Updated.")
 
 
-# 🗑 DELETE
+
 def delete():
     name = input("Name to delete: ")
 
@@ -87,7 +87,6 @@ def delete():
     print("Deleted.")
 
 
-# 📜 показать всё (чтобы ты видел результат)
 def show_all():
     cur.execute("SELECT * FROM phonebook")
     rows = cur.fetchall()
@@ -96,7 +95,7 @@ def show_all():
         print(row)
 
 
-# 🧠 МЕНЮ
+
 def menu():
     while True:
         print("\n1.Insert console")
