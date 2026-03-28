@@ -1,9 +1,7 @@
 from connect import get_connection
-import csv
 
 conn = get_connection()
 cur = conn.cursor()
-
 
 cur.execute("""
 CREATE TABLE IF NOT EXISTS phonebook (
@@ -13,7 +11,6 @@ CREATE TABLE IF NOT EXISTS phonebook (
 )
 """)
 conn.commit()
-
 
 
 def insert_from_console():
@@ -26,23 +23,6 @@ def insert_from_console():
     )
     conn.commit()
     print("Added.")
-
-
-
-def insert_from_csv():
-    with open("contacts.csv", newline='', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        next(reader)
-
-        for row in reader:
-            cur.execute(
-                "INSERT INTO phonebook (name, phone) VALUES (%s, %s)",
-                (row[0], row[1])
-            )
-
-    conn.commit()
-    print("CSV imported.")
-
 
 
 def search():
@@ -62,7 +42,6 @@ def search():
             print(row)
 
 
-
 def update():
     name = input("Name to update: ")
     new_phone = input("New phone: ")
@@ -73,7 +52,6 @@ def update():
     )
     conn.commit()
     print("Updated.")
-
 
 
 def delete():
@@ -95,32 +73,28 @@ def show_all():
         print(row)
 
 
-
 def menu():
     while True:
-        print("\n1.Insert console")
-        print("2.Insert CSV")
-        print("3.Search")
-        print("4.Update")
-        print("5.Delete")
-        print("6.Show all")
-        print("7.Exit")
+        print("\n1.Insert")
+        print("2.Search")
+        print("3.Update")
+        print("4.Delete")
+        print("5.Show all")
+        print("6.Exit")
 
         choice = input("Choose: ")
 
         if choice == "1":
             insert_from_console()
         elif choice == "2":
-            insert_from_csv()
-        elif choice == "3":
             search()
-        elif choice == "4":
+        elif choice == "3":
             update()
-        elif choice == "5":
+        elif choice == "4":
             delete()
-        elif choice == "6":
+        elif choice == "5":
             show_all()
-        elif choice == "7":
+        elif choice == "6":
             break
 
 
